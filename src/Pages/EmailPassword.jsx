@@ -17,14 +17,14 @@ const EmailPassword = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <div className="flex flex-col gap-5 justify-center items-center h-screen">
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-col gap-5 justify-center items-center h-screen w-screen">
+      <form onSubmit={handleSubmit} className="w-xs">
         <h1 className="font-bold text-lg text-center">
           Register Using Email & Password
         </h1>
         <br />
-        <div className="flex flex-col gap-5 w-72">
-          <label className="input validator ">
+        <div className="flex flex-col gap-5">
+          <label className="input validator w-full">
             <input
               type="email"
               name="email"
@@ -32,7 +32,7 @@ const EmailPassword = () => {
               required
             />
           </label>
-          <label className="input validator ">
+          <label className="input validator w-full">
             <input
               type={seePassword ? "text" : "password"}
               name="password"
