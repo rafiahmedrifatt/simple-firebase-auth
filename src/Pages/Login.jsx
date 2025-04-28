@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { use } from "react";
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
-  signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 import { Link } from "react-router";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
-  const [user, setUser] = useState();
+  const { signIn, signOutUser, user } = use(AuthContext);
+
   const provider = new GoogleAuthProvider();
   const gitProvider = new GithubAuthProvider();
 
@@ -18,9 +18,9 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    signInWithEmailAndPassword(auth, email, password)
+    signIn(email, password)
       .then((result) => {
-        setUser(result);
+        console.log(result);
       })
       .catch((error) => {
         console.log(error);
@@ -29,24 +29,23 @@ const Login = () => {
 
   const handleGoogleAuthentication = () => {
     signInWithPopup(auth, provider)
-      .then((result) => setUser(result.user))
+      .then((result) => console.log(result.user))
       .catch((error) => console.log(error));
   };
 
   const handleGithubAuthentication = () => {
     console.log("clicked");
     signInWithPopup(auth, gitProvider)
-      .then((result) => setUser(result.user))
+      .then((result) => console.log(result.user))
       .catch((error) => console.log(error));
   };
 
   const handleSignOut = () => {
-    signOut(auth).then((result) => {
-      console.log("signout");
-      setUser(null);
+    signOutUser().then(() => {
+      console.log("signout successful");
     });
   };
-  console.log(user);
+
   return (
     <div className="flex flex-col gap-5 justify-center items-center h-screen w-screen">
       {user ? (

@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React, { use } from "react";
 import { NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const Navbar = () => {
-  const user = useContext(AuthContext);
+  const { user } = use(AuthContext);
   console.log(user);
-
   return (
     <div className="flex items-center justify-center gap-6">
       <div className="navbar bg-base-100 shadow-sm">
