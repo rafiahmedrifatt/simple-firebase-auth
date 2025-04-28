@@ -41,8 +41,10 @@ const Login = () => {
   };
 
   const handleSignOut = () => {
-    console.log("signout");
-    signOut(auth);
+    signOut(auth).then((result) => {
+      console.log("signout");
+      setUser(null);
+    });
   };
   console.log(user);
   return (
