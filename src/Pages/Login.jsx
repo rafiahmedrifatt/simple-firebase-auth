@@ -5,11 +5,12 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
   const { signIn, signOutUser, user } = use(AuthContext);
+  const navigate = useNavigate();
 
   const provider = new GoogleAuthProvider();
   const gitProvider = new GithubAuthProvider();
@@ -21,6 +22,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         console.log(result);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);

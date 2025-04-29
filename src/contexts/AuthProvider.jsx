@@ -10,6 +10,7 @@ import {
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };

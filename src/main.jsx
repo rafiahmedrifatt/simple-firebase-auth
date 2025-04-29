@@ -8,6 +8,9 @@ import Home from "./Pages/Home.jsx";
 import Login from "./Pages/Login.jsx";
 import EmailPassword from "./Pages/EmailPassword.jsx";
 import AuthProvider from "./contexts/AuthProvider.jsx";
+import About from "./Pages/About.jsx";
+import Blogs from "./Pages/Blogs.jsx";
+import PrivateRoute from "./routes/privateRoute/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
       {
         path: "/emailPass",
         Component: EmailPassword,
+      },
+      {
+        path: "/about",
+        element: (
+          <PrivateRoute>
+            <About />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/blogs",
+        Component: Blogs,
       },
     ],
   },

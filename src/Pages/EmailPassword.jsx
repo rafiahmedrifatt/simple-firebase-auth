@@ -2,10 +2,11 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../firebase/firebase.init";
 import { BsEmojiExpressionless, BsEmojiNeutral } from "react-icons/bs";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const EmailPassword = () => {
   const [seePassword, setSeePassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +14,10 @@ const EmailPassword = () => {
     const password = e.target.password.value;
     console.log(email, password);
     createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        navigate("/");
+      })
       .catch((error) => console.log(error));
   };
   return (
